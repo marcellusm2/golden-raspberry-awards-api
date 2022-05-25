@@ -1,0 +1,38 @@
+micronaut:
+  application:
+    name: goldenRaspberryAwardsApi
+  router:
+    static-resources:
+      swagger:
+        paths: classpath:META-INF/swagger
+        mapping: /swagger/**
+      swagger-ui:
+        paths: classpath:META-INF/swagger/views/swagger-ui
+        mapping: /swagger-ui/**
+
+netty:
+  default:
+    allocator:
+      max-order: 3
+
+app:
+  adapters:
+    fs:
+      movie-list: classpath:data/movielist.csv
+
+r2dbc:
+  datasources:
+    default:
+      url: r2dbc:h2:mem:///awardsdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+      username: sa
+      password: sa
+      schema-generate: CREATE_DROP
+      dialect: H2
+
+jpa:
+  default:
+    properties:
+      hibernate:
+        hbm2ddl:
+          auto: update
+        show_sql: true
