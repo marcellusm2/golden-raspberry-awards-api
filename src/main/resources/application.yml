@@ -1,0 +1,30 @@
+micronaut:
+  application:
+    name: goldenRaspberryAwardsApi
+
+netty:
+  default:
+    allocator:
+      max-order: 3
+
+app:
+  adapters:
+    fs:
+      movielist: classpath:data/movielist.csv
+
+r2dbc:
+  datasources:
+    default:
+      url: r2dbc:h2:mem:///awardsdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+      username: sa
+      password: sa
+      schema-generate: CREATE_DROP
+      dialect: H2
+
+jpa:
+  default:
+    properties:
+      hibernate:
+        hbm2ddl:
+          auto: update
+        show_sql: true
