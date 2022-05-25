@@ -21,11 +21,11 @@ class ProducerEndpoint(private val service: ProducerService) {
     private fun listWithFilters(bean: ProducerFilterBean): Any {
         return when {
             bean.winner == true && IntervalFilterEnum.BOTH.value == bean.awardInterval -> service.getMinMaxAwardIntervals()
-            bean.winner == true && IntervalFilterEnum.MIN.value == bean.awardInterval -> service.getMinAwardIntervals()
-            bean.winner == true && IntervalFilterEnum.MAX.value == bean.awardInterval -> service.getMaxAwardIntervals()
+            bean.winner == true && IntervalFilterEnum.MIN.value  == bean.awardInterval -> service.getMinAwardIntervals()
+            bean.winner == true && IntervalFilterEnum.MAX.value  == bean.awardInterval -> service.getMaxAwardIntervals()
             bean.winner == true -> service.listWinners()
             else -> service.listAll()
         }
-
     }
+
 }

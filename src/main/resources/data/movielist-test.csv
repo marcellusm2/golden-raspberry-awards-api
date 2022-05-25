@@ -28,8 +28,8 @@ year;title;studios;producers;winner
 1984;Cannonball Run II;Warner Bros.;Albert S. Ruddy;
 1984;Rhinestone;20th Century Fox;Marvin Worth and Howard Smith;
 1984;Sheena;Columbia Pictures;Paul Aratow;
-1984;Where the Boys Are '84;TriStar Pictures;Allan Carr;
-1985;Rambo: First Blood Part II;Columbia Pictures;Buzz Feitshans;yes
+1984;Where the Boys Are '84;TriStar Pictures;Allan Carr;yes
+1985;Rambo: First Blood Part II;Columbia Pictures;Buzz Feitshans;
 1985;Fever Pitch;MGM, United Artists;Freddie Fields;
 1985;Revolution;Warner Bros.;Irwin Winkler;
 1985;Rocky IV;MGM, United Artists;Irwin Winkler and Robert Chartoff;
@@ -48,19 +48,19 @@ year;title;studios;producers;winner
 1988;Caddyshack II;Warner Bros.;Neil Canton, Jon Peters and Peter Guber;
 1988;Hot to Trot;Warner Bros.;Steve Tisch;
 1988;Mac and Me;Orion Pictures;R. J. Louis;
-1988;Rambo III;TriStar Pictures, Carolco Pictures;Buzz Feitshans;
+1988;Rambo III;TriStar Pictures, Carolco Pictures;Buzz Feitshans;yes
 1989;Star Trek V: The Final Frontier;Paramount Pictures;Harve Bennett;yes
 1989;The Karate Kid Part III;Columbia Pictures;Jerry Weintraub;
 1989;Lock Up;TriStar Pictures, Carolco Pictures;Charles Gordon and Lawrence Gordon;
-1989;Road House;United Artists;Joel Silver;
+1989;Road House;United Artists;Joel Silver;yes
 1989;Speed Zone;Orion Pictures;Murray Shostack;
 1990;The Adventures of Ford Fairlane;20th Century Fox;Steven Perry and Joel Silver;yes
 1990;Ghosts Can't Do It;Triumph Releasing;Bo Derek;yes
 1990;The Bonfire of the Vanities;Warner Bros.;Brian De Palma;
 1990;Graffiti Bridge;Warner Bros.;Randy Phillips and Craig Rice;
 1990;Rocky V;United Artists;Robert Chartoff and Irwin Winkler;
-1991;Hudson Hawk;TriStar Pictures;Joel Silver;yes
-1991;Cool as Ice;Universal Studios;Carolyn Pfeiffer and Lionel Wingram;
+1991;Hudson Hawk;TriStar Pictures;Joel Silver;
+1991;Cool as Ice;Universal Studios;Carolyn Pfeiffer and Lionel Wingram;yes
 1991;Dice Rules;Seven Arts Productions;Loucas George;
 1991;Nothing but Trouble;Warner Bros.;Lester Berman and Robert K. Weiss;
 1991;Return to the Blue Lagoon;Columbia Pictures;William A. Graham;
@@ -69,12 +69,14 @@ year;title;studios;producers;winner
 1992;Christopher Columbus: The Discovery;Warner Bros.;Alexander Salkind and Ilya Salkind;
 1992;Final Analysis;20th Century Fox;Paul Junger Witt, Charles Roven and Tony Thomas;
 1992;Newsies;Walt Disney Pictures;Michael Finnell;
-1993;Indecent Proposal;Paramount Pictures;Sherry Lansing;yes
+1993;Indecent Proposal;Paramount Pictures;Joel Silver;yes
+1993;Indecent Proposal 2;Paramount Pictures;Sherry Lansing;yes
 1993;Body of Evidence;MGM, United Artists;Dino De Laurentiis;
 1993;Cliffhanger;TriStar Pictures, Carolco Pictures;Renny Harlin and Alan Marshall;
 1993;Last Action Hero;Columbia Pictures;John McTiernan and Stephen J. Roth;
 1993;Sliver;Paramount Pictures;Robert Evans;
-1994;Color of Night;Hollywood Pictures;Buzz Feitshans and David Matalon;yes
+1994;Color of Night;Hollywood Pictures;Buzz Feitshans;yes
+1994;Color of Night 2;Hollywood Pictures;Buzz Feitshans and David Matalon;yes
 1994;North;Columbia Pictures, Castle Rock Entertainment;Rob Reiner and Alan Zweibel;
 1994;On Deadly Ground;Warner Bros.;A. Kitman Ho, Julius R. Nasso and Steven Seagal;
 1994;The Specialist;Warner Bros.;Jerry Weintraub;

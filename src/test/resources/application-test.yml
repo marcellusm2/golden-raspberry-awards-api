@@ -10,7 +10,7 @@ netty:
 app:
   adapters:
     fs:
-      movielist: classpath:data/movielist.csv
+      movielist: classpath:data/movielist-test.csv
 
 r2dbc:
   datasources:

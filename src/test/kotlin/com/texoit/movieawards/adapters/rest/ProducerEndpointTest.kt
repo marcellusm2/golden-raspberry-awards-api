@@ -1,6 +1,5 @@
 package com.texoit.movieawards.adapters.rest
 
-import com.texoit.movieawards.domain.model.MinMaxAwardIntervals
 import io.micronaut.core.type.Argument
 import io.micronaut.http.HttpRequest
 import io.micronaut.http.HttpResponse
@@ -20,15 +19,96 @@ class ProducerEndpointTest {
     lateinit var client: HttpClient
 
     @Test
-    fun testOneWinnerProducer() {
-        val rsp = invoke()
+    fun testAllProducers() {
+        val rsp = invokeGet("/producers")
+
         assertEquals(HttpStatus.OK, rsp.status)
         assertNotNull(rsp.body())
     }
 
-    private fun invoke(): HttpResponse<MutableList<MinMaxAwardIntervals>> {
-        val request: HttpRequest<Any> = HttpRequest.GET("/producers")
+    @Test
+    fun testWinnerProducers() {
+        val rsp = invokeGet("/producers?winner=true")
+
+        assertEquals(HttpStatus.OK, rsp.status)
+        assertNotNull(rsp.body())
+    }
+
+    @Test
+    fun testMinIntervalsWinnersProducers() {
+        val rsp = invokeGet("/producers?winner=true&awardInterval=min")
+
+        assertEquals(HttpStatus.OK, rsp.status)
+
+        rsp.body()?.let {
+            assertNotNull(it)
+            assertTrue(it.toString()
+                .contains(
+                    "producer=Allan Carr, interval=4, previousWin=1980, followingWin=1984"
+                )
+            )
+            assertTrue(it.toString()
+                .contains(
+                    "producer=Joel Silver, interval=4, previousWin=1989, followingWin=1993"
+                )
+            )
+        }
+    }
+
+    @Test
+    fun testMaxIntervalsWinnersProducers() {
+        val rsp = invokeGet("/producers?winner=true&awardInterval=max")
+
+        assertEquals(HttpStatus.OK, rsp.status)
+        rsp.body()?.let {
+            assertNotNull(it)
+            assertTrue(it.toString()
+                .contains(
+                    "producer=Buzz Feitshans, interval=6, previousWin=1988, followingWin=1994"
+                )
+            )
+            assertTrue(it.toString()
+                .contains(
+                    "producer=Bo Derek, interval=6, previousWin=1984, followingWin=1990"
+                )
+            )
+        }
+    }
+
+    @Test
+    fun testMinMaxIntervalsWinnersProducers() {
+        val rsp = invokeGet("/producers?winner=true&awardInterval=both")
+
+        println(rsp.body())
+        assertEquals(HttpStatus.OK, rsp.status)
+        rsp.body()?.let {
+            assertNotNull(it)
+            assertTrue(it.toString()
+                .contains(
+                    "producer=Allan Carr, interval=4, previousWin=1980, followingWin=1984"
+                )
+            )
+            assertTrue(it.toString()
+                .contains(
+                    "producer=Bo Derek, interval=6, previousWin=1984, followingWin=1990"
+                )
+            )
+            assertTrue(it.toString()
+                .contains(
+                    "producer=Buzz Feitshans, interval=6, previousWin=1988, followingWin=1994"
+                )
+            )
+            assertTrue(it.toString()
+                .contains(
+                    "producer=Joel Silver, interval=4, previousWin=1989, followingWin=1993"
+                )
+            )
+        }
+    }
+
+    private fun invokeGet(path: String): HttpResponse<MutableList<Any>> {
+        val request: HttpRequest<Any> = HttpRequest.GET(path)
         return client.toBlocking().exchange(request,
-            Argument.listOf(MinMaxAwardIntervals::class.java))
+            Argument.listOf(Any::class.java))
     }
 }

@@ -23,6 +23,13 @@ API RESTful com lista de indicados e vencedores da categoria Pior Filme do Golde
 ./gradlew run
 ```
 
+#### Test
+http://localhost:8080/producers?winner=true&awardInterval=both
+
+ou
+```bash
+./gradlew test
+```
 
 ### Execução nativa (opcional)
 
@@ -54,11 +61,4 @@ ou
 #### Execução
 ```bash
 docker-compose up -d
-```
-
-
-### Testes
-
-```bash
-./gradlew test
 ```

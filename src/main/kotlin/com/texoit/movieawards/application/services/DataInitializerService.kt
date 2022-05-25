@@ -13,7 +13,7 @@ import kotlinx.coroutines.runBlocking
 import org.slf4j.LoggerFactory
 
 @Singleton
-class DataInitializerService(@Property(name = "app.adapters.fs.movie-list")
+class DataInitializerService(@Property(name = "app.adapters.fs.movielist")
                       private val file: String,
                              private val csvDataLoader: DataLoader,
                              private val movieRepository: MovieRepository,
