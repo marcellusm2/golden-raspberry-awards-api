@@ -60,10 +60,6 @@ dependencies {
     implementation("com.opencsv:opencsv:5.6")
 }
 
-//nativeImage {
-//    args("-H:+StaticExecutableWithDynamicLibC")
-//}
-
 application {
     mainClass.set("com.texoit.ApplicationKt")
 }
@@ -83,6 +79,7 @@ tasks {
         }
     }
 }
+
 graalvmNative.toolchainDetection.set(false)
 micronaut {
     runtime("netty")
