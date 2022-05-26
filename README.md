@@ -40,25 +40,3 @@ ou
 ```bash
 ./gradlew nativeRun
 ```
-
-
-### Execução via docker (opcional)
-
-#### Pré requisitos
-
-* Jdk17
-* GraalVM 17 (opcional)
-* Docker + Docker Compose
-
-#### Compilação
-```bash
-./gradlew clean build
-```
-ou
-```bash
-./gradlew nativeCompile
-```
-#### Execução
-```bash
-docker-compose up -d
-```
