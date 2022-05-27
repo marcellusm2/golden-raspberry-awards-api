@@ -13,52 +13,54 @@ import java.util.UUID
 @R2dbcRepository(dialect = Dialect.H2)
 interface MovieRepository: CoroutineCrudRepository<Movie, UUID>, CoroutineJpaSpecificationExecutor<Movie> {
 
-    @Query("""SELECT movie_.`producer_id` AS id,
-                     movie_producer_.`name` AS producer,
+    @Query("""SELECT producer_.id,
+                     producer_.name AS producer,
                      null AS `interval`,
                      null AS previous_win,
                      null AS following_win
-                FROM `movie` movie_
-           LEFT JOIN `producer` movie_producer_ ON movie_.`producer_id`=movie_producer_.`id`""")
-    @Join(value = "producer", type = Join.Type.LEFT_FETCH)
+                FROM movie_producer movie_producer_
+                JOIN movie movie_ ON movie_.id = movie_producer_.movie_id
+                JOIN producer producer_ ON producer_.id = movie_producer_.producer_id""")
     fun all(): List<ProducerInterval>
 
-    @Query("""SELECT movie_.`producer_id` AS id,
-                     movie_producer_.`name` AS producer,
+    @Query("""SELECT producer_.id,
+                     producer_.name AS producer,
                      null AS `interval`,
                      null AS previous_win,
                      null AS following_win
-                FROM `movie` movie_
-           LEFT JOIN `producer` movie_producer_ ON movie_.`producer_id`=movie_producer_.`id`
-               WHERE movie_.`winner` IS true""")
-    @Join(value = "producer", type = Join.Type.LEFT_FETCH)
+                FROM movie_producer movie_producer_
+                JOIN movie movie_ ON movie_.id = movie_producer_.movie_id
+                JOIN producer producer_ ON producer_.id = movie_producer_.producer_id
+               WHERE movie_.winner IS true""")
     fun allWinners(): List<ProducerInterval>
 
     @Query("""SELECT '' AS id,
-                     winner_producer.`name` AS producer,
-                     previous.`year` AS previous_win,
-                     following.`year` AS following_win,
-                     following.`year` - previous.`year` AS `interval`
+                     winner_producer.name AS producer,
+                     previous.year AS previous_win,
+                     following.year AS following_win,
+                     following.year - previous.year AS `interval`
                 FROM (
-                        SELECT movie_.`producer_id`, producer_.`name`
-                          FROM `movie` movie_, `producer` producer_
-                         WHERE movie_.`producer_id` = producer_.`id`
-                           AND movie_.`winner` IS true
-                      GROUP BY movie_.`producer_id`
-                        HAVING COUNT(movie_.`producer_id`) > 1
-                ) as winner_producer
-                LEFT JOIN (
-                        SELECT movie_.`producer_id`, MIN(movie_.`year`) as year
-                          FROM `movie` movie_
-                         WHERE movie_.`winner` IS true
-                      GROUP BY movie_.`producer_id`
-                ) as previous ON previous.`producer_id` = winner_producer.`producer_id`
-                LEFT JOIN (
-                        SELECT movie_.`producer_id`, MAX(movie_.`year`) as year
-                          FROM `movie` movie_
-                         WHERE movie_.`winner` IS true
-                      GROUP BY movie_.`producer_id`
-                ) as following ON following.`producer_id` = winner_producer.`producer_id`""")
-    @Join(value = "producer", type = Join.Type.LEFT_FETCH)
+                        SELECT producer_.id AS producer_id, producer_.name
+                          FROM movie_producer movie_producer_
+                          JOIN movie movie_ ON movie_.id = movie_producer_.movie_id
+                          JOIN producer producer_ ON producer_.id = movie_producer_.producer_id
+                         WHERE movie_.winner IS true
+                      GROUP BY producer_.id
+                        HAVING COUNT(producer_.id) > 1
+                ) AS winner_producer
+                JOIN (
+                        SELECT movie_producer_.producer_id, MIN(movie_.year) AS year
+                          FROM movie_producer movie_producer_
+                          JOIN movie movie_ ON movie_.id = movie_producer_.movie_id
+                         WHERE movie_.winner IS true
+                      GROUP BY movie_producer_.producer_id
+                ) AS previous ON previous.producer_id = winner_producer.producer_id
+                JOIN (
+                        SELECT movie_producer_.producer_id, MAX(movie_.year) AS year
+                          FROM movie_producer movie_producer_
+                          JOIN movie movie_ ON movie_.id = movie_producer_.movie_id
+                         WHERE movie_.winner IS true
+                      GROUP BY movie_producer_.producer_id
+                ) AS following ON following.producer_id = winner_producer.producer_id""")
     fun intervals(): List<ProducerInterval>
 }

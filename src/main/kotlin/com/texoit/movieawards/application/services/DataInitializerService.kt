@@ -22,6 +22,7 @@ class DataInitializerService(@Property(name = "app.adapters.fs.movielist")
 
     companion object DataInitializer {
         private val log = LoggerFactory.getLogger(DataInitializerService::class.java)
+        private val separator = Regex(", | and ")
     }
 
     fun setup() {
@@ -37,16 +38,15 @@ class DataInitializerService(@Property(name = "app.adapters.fs.movielist")
         return Movie().apply {
             year = movieData[0].toInt()
             title = movieData[1]
-            studio = getStudio(movieData)
-            producer = getProducer(movieData)
+            studios = getStudios(movieData[2])
+            producers = getProducers(movieData[3])
             winner = movieData[4] == "yes"
         }
     }
 
-    private fun getProducer(movieData: Array<String>) =
-        producerRepository.findByName(movieData[3]) ?: Producer(movieData[3])
+    private fun getStudios(rawStudio: String): List<Studio> =
+        rawStudio.split(separator).map { studio -> studioRepository.findByName(studio) ?: Studio(studio) }
 
-    private fun getStudio(movieData: Array<String>) =
-        studioRepository.findByName(movieData[2]) ?: Studio(movieData[2])
-
+    private fun getProducers(rawProducer: String): List<Producer> =
+        rawProducer.split(separator).map { producer -> producerRepository.findByName(producer) ?: Producer(producer) }
 }

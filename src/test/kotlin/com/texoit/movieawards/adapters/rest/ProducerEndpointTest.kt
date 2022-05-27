@@ -64,12 +64,7 @@ class ProducerEndpointTest {
             assertNotNull(it)
             assertTrue(it.toString()
                 .contains(
-                    "producer=Buzz Feitshans, interval=6, previousWin=1988, followingWin=1994"
-                )
-            )
-            assertTrue(it.toString()
-                .contains(
-                    "producer=Bo Derek, interval=6, previousWin=1984, followingWin=1990"
+                    "producer=Matthew Vaughn, interval=13, previousWin=2002, followingWin=2015"
                 )
             )
         }
@@ -90,17 +85,12 @@ class ProducerEndpointTest {
             )
             assertTrue(it.toString()
                 .contains(
-                    "producer=Bo Derek, interval=6, previousWin=1984, followingWin=1990"
-                )
-            )
-            assertTrue(it.toString()
-                .contains(
-                    "producer=Buzz Feitshans, interval=6, previousWin=1988, followingWin=1994"
-                )
-            )
-            assertTrue(it.toString()
-                .contains(
                     "producer=Joel Silver, interval=4, previousWin=1989, followingWin=1993"
+                )
+            )
+            assertTrue(it.toString()
+                .contains(
+                    "producer=Matthew Vaughn, interval=13, previousWin=2002, followingWin=2015"
                 )
             )
         }

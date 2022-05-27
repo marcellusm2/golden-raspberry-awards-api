@@ -14,16 +14,16 @@ import io.micronaut.http.annotation.RequestBean
 class ProducerEndpoint(private val service: ProducerService) {
 
     @Get(uri = "/producers{?winner,awardInterval}", produces = [MediaType.APPLICATION_JSON])
-    fun list(@RequestBean bean: ProducerFilterBean): HttpResponse<*> {
-        return ok(listWithFilters(bean))
+    fun list(@RequestBean filter: ProducerFilterBean): HttpResponse<*> {
+        return ok(listWithFilters(filter))
     }
 
-    private fun listWithFilters(bean: ProducerFilterBean): Any {
+    private fun listWithFilters(filter: ProducerFilterBean): Any {
         return when {
-            bean.winner == true && IntervalFilterEnum.BOTH.value == bean.awardInterval -> service.getMinMaxAwardIntervals()
-            bean.winner == true && IntervalFilterEnum.MIN.value  == bean.awardInterval -> service.getMinAwardIntervals()
-            bean.winner == true && IntervalFilterEnum.MAX.value  == bean.awardInterval -> service.getMaxAwardIntervals()
-            bean.winner == true -> service.listWinners()
+            filter.winner == true && IntervalFilterEnum.BOTH.value == filter.awardInterval -> service.getMinMaxAwardIntervals()
+            filter.winner == true && IntervalFilterEnum.MIN.value  == filter.awardInterval -> service.getMinAwardIntervals()
+            filter.winner == true && IntervalFilterEnum.MAX.value  == filter.awardInterval -> service.getMaxAwardIntervals()
+            filter.winner == true -> service.listWinners()
             else -> service.listAll()
         }
     }
