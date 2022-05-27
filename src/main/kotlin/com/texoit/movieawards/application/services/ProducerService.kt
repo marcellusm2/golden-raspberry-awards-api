@@ -17,39 +17,37 @@ class ProducerService(private val producerRrepository: ProducerRepository,
         private val log = LoggerFactory.getLogger(ProducerService::class.java)
     }
 
-    fun listAllNew(): Flow<Producer> = producerRrepository.findAll()
-
     fun listAll(): List<ProducerInterval> = movieRepository.all()
 
     fun listWinners(): List<ProducerInterval> = movieRepository.allWinners()
 
-    fun getMinMaxAwardIntervals(): MinMaxProducerIntervals {
+    fun getMinMaxAwardIntervals(): MinMaxProducerIntervals? {
         log.debug("searching min max list of winners")
         val filtered = movieRepository.intervals().groupBy { it.interval!! }.toSortedMap().entries
         log.debug("the search of list min max of winners has finish")
         return when {
             filtered.isNotEmpty() -> MinMaxProducerIntervals(filtered.first().value, filtered.last().value)
-            else -> MinMaxProducerIntervals(emptyList(), emptyList())
+            else -> null
         }
     }
 
-    fun getMinAwardIntervals(): MinMaxProducerIntervals {
+    fun getMinAwardIntervals(): MinMaxProducerIntervals? {
         log.debug("searching min list of winners")
         val filtered = movieRepository.intervals().groupBy { it.interval!! }.toSortedMap().entries
         log.debug("the search of list min of winners has finish")
         return when {
             filtered.isNotEmpty() -> MinMaxProducerIntervals(filtered.first().value, emptyList())
-            else -> MinMaxProducerIntervals(emptyList(), emptyList())
+            else -> null
         }
     }
 
-    fun getMaxAwardIntervals(): MinMaxProducerIntervals {
+    fun getMaxAwardIntervals(): MinMaxProducerIntervals? {
         log.debug("searching max list of winners")
         val filtered = movieRepository.intervals().groupBy { it.interval!! }.toSortedMap().entries
         log.debug("the search of list max of winners has finish")
         return when {
             filtered.isNotEmpty() -> MinMaxProducerIntervals(emptyList(), filtered.last().value)
-            else -> MinMaxProducerIntervals(emptyList(), emptyList())
+            else -> null
         }
     }
 }
