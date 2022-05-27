@@ -12,10 +12,10 @@ data class Movie (
     var id: UUID?,
     var year: Int?,
     var title: String,
-    @Relation(Relation.Kind.MANY_TO_ONE, cascade = [Relation.Cascade.ALL])
-    var studio: Studio?,
-    @Relation(Relation.Kind.MANY_TO_ONE, cascade = [Relation.Cascade.ALL])
-    var producer: Producer?,
+    @Relation(Relation.Kind.MANY_TO_MANY, cascade = [Relation.Cascade.ALL])
+    var studios: List<Studio>?,
+    @Relation(Relation.Kind.MANY_TO_MANY, cascade = [Relation.Cascade.ALL])
+    var producers: List<Producer>?,
     var winner: Boolean?
 ) {
     constructor() : this(null, null, "", null, null, null)
